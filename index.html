@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Inspector de Frutas IA</h2>
+    <video id="video" width="320" height="240" autoplay></video>
+    <button onclick="capturar()">Analizar Fruta</button>
+    <h3 id="resultado">Esperando...</h3>
+
+    <script>
+        const video = document.getElementById('video');
+        navigator.mediaDevices.getUserMedia({ video: true }).then(s => video.srcObject = s);
+
+        async function capturar() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 320; canvas.height = 240;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            canvas.toBlob(async (blob) => {
+                const formData = new FormData();
+                formData.append('file', blob);
+                const res = await fetch('/predict', { method: 'POST', body: formData });
+                const data = await res.json();
+                document.getElementById('resultado').innerText = "Resultado: " + data.resultado;
+            }, 'image/jpeg');
+        }
+    </script>
+</body>
+</html>
