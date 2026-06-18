@@ -20,3 +20,7 @@ async def predict(file: UploadFile = File(...)):
     result = session.run(None, {session.get_inputs()[0].name: input_tensor})[0]
     label = "Podrida" if np.argmax(result) == 0 else "Fresca"
     return {"resultado": label}
+
+@app.get("/predict")
+def read_predict():
+    return {"mensaje": "La API está lista. Envía una petición POST con una imagen a este mismo endpoint."}
