@@ -1,12 +1,6 @@
 {
-  "builds": [
-    {
-      "src": "main.py",
-      "use": "@vercel/python"
-    }
-  ],
   "rewrites": [
-    { "source": "/", "destination": "index.html" },
-    { "source": "/predict", "destination": "main.py" }
+    { "source": "/predict", "destination": "main.py" },
+    { "source": "/", "destination": "index.html" }
   ]
 }
