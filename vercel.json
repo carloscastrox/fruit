@@ -5,14 +5,8 @@
       "use": "@vercel/python"
     }
   ],
-  "routes": [
-    {
-      "src": "/predict",
-      "dest": "main.py"
-    },
-    {
-      "src": "/",
-      "dest": "index.html"
-    }
+  "rewrites": [
+    { "source": "/", "destination": "index.html" },
+    { "source": "/predict", "destination": "main.py" }
   ]
 }
